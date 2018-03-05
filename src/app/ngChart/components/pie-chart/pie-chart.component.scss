@@ -1,17 +1,17 @@
 $primaryColor: #0074d9;
 
 circle {
-  fill: #ddd;
+  fill: #494949;
   stroke: $primaryColor;
   stroke-width: 50;
   stroke-dasharray: 0 158;
   transition: stroke-dasharray .3s ease;
 }
 
-svg {
+svg.chart {
   margin: 0 auto;
-  transform: rotate(-90deg);
-  background: #ddd;
+  transform: rotate(-120deg);
+  background: #494949;
   border-radius: 50%;
   display: block;
 }
@@ -62,4 +62,28 @@ body {
 
 body, html {
   height: 100%;
+}
+#tooltip {
+  position: absolute;
+  width: 200px;
+  height: auto;
+  padding: 10px;
+  background-color: white;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+  -mox-box-shadow: 4px 4px 4px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 4px 4px 10px rbga(0, 0, 0, 0.4);
+   pointer-events: none;
+}
+
+#tooltip.hidden {
+  opacity: 0;
+}
+#tooltip p {
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 20px;
 }
