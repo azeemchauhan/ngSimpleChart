@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ElementRef, Renderer2, ViewChild, AfterViewInit, HostListener } from '@angular/core';
 
+
 @Component({
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html',
@@ -8,6 +9,7 @@ import { Component, OnInit, Input, ElementRef, Renderer2, ViewChild, AfterViewIn
 export class PieChartComponent implements OnInit, AfterViewInit {
   @Input() data: any;
   @ViewChild('pieCircle') circle: ElementRef;
+  @ViewChild('tooltip') tooltip : ElementRef;
   constructor(private _eleRef: ElementRef, private _render: Renderer2) {
    }
   setPieChart():void {
@@ -18,13 +20,16 @@ export class PieChartComponent implements OnInit, AfterViewInit {
   }
   displayTooltip():void {
     /**bind mouseover event to show tooltio */
-    this._render.listen(this.circle.nativeElement, 'mouseover', function($event){
+    this._render.listen(this.circle.nativeElement, 'mouseover', ($event)=>{
       console.log('>>>'+$event.pageX+'px');
-      console.log('>>>'+$event.pageY+'px');
-    })
+      console.log('>>>'+this.circle.nativeElement.offsetHeight+'px');
+      this._render.setStyle(this.tooltip.nativeElement, 'left', ($event.pageX)+'px');
+      this._render.setStyle(this.tooltip.nativeElement, 'top', ($event.pageY-50)+'px');
+      this._render.setStyle(this.tooltip.nativeElement, 'opacity', 1);
+     })
     /**bind mouseover event to show tooltio */
-    this._render.listen(this.circle.nativeElement, 'mouseout', function($event){
-      
+    this._render.listen(this.circle.nativeElement, 'mouseout', $event=>{
+      this._render.setStyle(this.tooltip.nativeElement, 'opacity', 0);
     })
   }
   ngOnInit() {
